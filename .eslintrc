@@ -1,0 +1,6 @@
+{
+  "extends": "canvas",
+  "env": {
+    "node": true
+  }
+}
