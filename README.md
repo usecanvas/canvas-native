@@ -1,4 +1,4 @@
-# Canvas Native
+# Canvas Native [![Circle CI](https://circleci.com/gh/usecanvas/canvas-native.svg?style=svg&circle-token=69d5436f464606a7de833acd870799390aef8fee)](https://circleci.com/gh/usecanvas/canvas-native)
 
 Canvas Native is a set of utilities for parsing and converting between the
 native Canvas format and other formats.
