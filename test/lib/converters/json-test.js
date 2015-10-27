@@ -64,6 +64,38 @@ describe('converters/json', () => {
     ]);
   });
 
+  it('does not nest under headers', () => {
+    const doc = parse([
+      '# Header',
+      `${wrap('unordered-list-1')}- UL-1-0`,
+    ].join('\n'));
+
+    expect(convert(doc).content).to.eql([
+      {
+        type   : 'heading',
+        meta   : { level: 1 },
+        content: '# Header',
+      },
+      {
+        type   : 'unordered-list',
+        meta   : { level: 0 },
+        content: [
+          {
+            type: 'unordered-list',
+            meta: { level: 1 },
+            content: [
+              {
+                type   : 'unordered-list-item',
+                meta   : { level: 1 },
+                content: '- UL-1-0'
+              }
+            ]
+          }
+        ]
+      }
+    ]);
+  });
+
   it('handles nested lists', () => {
     const doc = parse([
       `${wrap('unordered-list-1')}- UL-1-0`,
