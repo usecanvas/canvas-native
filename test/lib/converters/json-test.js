@@ -4,6 +4,16 @@ import { parse   } from '../../../lib/parser';
 import { wrap    } from '../../../lib/brackets';
 
 describe('converters/json', () => {
+  it('includes a title', () => {
+    const doc = parse([
+      wrap('doc-heading') + 'Foo'
+    ].join('\n'));
+
+    expect(convert(doc).meta).to.eql({
+      title: 'Foo'
+    });
+  });
+
   it('converts simple paragraphs to JSON', () => {
     const doc = parse([
       'Foo',

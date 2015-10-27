@@ -6,7 +6,7 @@ Object.defineProperty(exports, '__esModule', {
 exports.convert = convert;
 
 function convert(native) {
-  var json = createGroup('canvas');
+  var json = createCanvas(native);
 
   var nodeStack = [json];
   var currentNode = nodeStack[nodeStack.length - 1];
@@ -90,6 +90,41 @@ function appendGroupForLine(node, line) {
 
 function appendLine(node, line) {
   node.content.push(line.toJSON());
+}
+
+function createCanvas(native) {
+  var json = createGroup('canvas');
+  json.meta = { title: null };
+
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = native[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var line = _step2.value;
+
+      if (line.type === 'title') {
+        json.meta.title = line.match[2];
+        break;
+      }
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+        _iterator2['return']();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  return json;
 }
 
 function createGroup(type) {
