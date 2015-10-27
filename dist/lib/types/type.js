@@ -31,6 +31,11 @@ var Type = (function () {
       return 'canvas';
     }
   }, {
+    key: 'isNesting',
+    get: function get() {
+      return typeof this.level === 'number' && this.groupType !== 'canvas';
+    }
+  }, {
     key: 'type',
     get: function get() {
       return this.constructor.name;

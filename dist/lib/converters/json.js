@@ -101,7 +101,7 @@ function createGroup(type) {
 function createGroupFromLine(line) {
   var group = createGroup(line.groupType);
 
-  if (typeof line.level === 'number') {
+  if (line.isNesting) {
     group.meta = { level: line.level };
   }
 
@@ -123,7 +123,7 @@ function getNodeLevel(node) {
 function nodeContainsLine(node, line) {
   var sameType = node.type === line.groupType;
 
-  if (typeof line.level === 'number') {
+  if (line.isNesting) {
     return sameType && line.level === getNodeLevel(node);
   }
 
@@ -133,7 +133,7 @@ function nodeContainsLine(node, line) {
 function nodeContainsNestedLine(node, line) {
   var nodeLevel = getNodeLevel(node);
 
-  if (typeof line.level !== 'number') {
+  if (!line.isNesting) {
     return false;
   }
 
