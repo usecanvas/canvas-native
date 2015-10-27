@@ -3,46 +3,51 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
-var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-
 exports.convert = convert;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _scanner = require('../scanner');
-
-var _scanner2 = _interopRequireDefault(_scanner);
 
 function convert(native) {
   var json = createGroup('canvas');
-  var scanner = new _scanner2['default'](native);
 
-  var currentNode = json;
+  var nodeStack = [json];
+  var currentNode = nodeStack[nodeStack.length - 1];
 
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
 
   try {
-    for (var _iterator = scanner[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _step$value = _slicedToArray(_step.value, 2);
+    lineLoop: for (var _iterator = native[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var line = _step.value;
 
-      var current = _step$value[1];
+      while (nodeStack.length >= 0) {
+        if (nodeContainsLine(currentNode, line)) {
+          appendLine(currentNode, line);
+          continue lineLoop;
+        }
 
-      var groupType = current.groupType;
+        if (nodeContainsNestedLine(currentNode, line)) {
+          var newNodes = appendGroupForLine(currentNode, line);
+          nodeStack = nodeStack.concat(newNodes);
+          currentNode = nodeStack[nodeStack.length - 1];
+          appendLine(currentNode, line);
+          continue lineLoop;
+        }
 
-      if (!nodeContainsLine(currentNode, current)) {
-        if (groupType === 'canvas') {
-          currentNode = json;
-        } else {
-          var newGroup = createGroup(groupType);
+        if (currentNode.type === 'canvas') {
+          var newGroup = createGroupFromLine(line);
           json.content.push(newGroup);
           currentNode = newGroup;
+          nodeStack.push(newGroup);
+          appendLine(currentNode, line);
+          continue lineLoop;
         }
+
+        currentNode = nodeStack.pop() || json;
       }
 
-      currentNode.content.push(current.toJSON());
+      if (!nodeStack.length) {
+        nodeStack = [json];
+      }
     }
   } catch (err) {
     _didIteratorError = true;
@@ -62,6 +67,30 @@ function convert(native) {
   return json;
 }
 
+function appendGroupForLine(node, line) {
+  var nodeLevel = getNodeLevel(node);
+  var lineLevel = line.level;
+
+  var currentNode = node;
+  var nodeStack = [];
+
+  var i = nodeLevel;
+  while (i < lineLevel) {
+    var group = createGroup(line.groupType);
+    group.meta = { level: i + 1 };
+    nodeStack.push(group);
+    currentNode.content.push(group);
+    currentNode = group;
+    i++;
+  }
+
+  return nodeStack;
+}
+
+function appendLine(node, line) {
+  node.content.push(line.toJSON());
+}
+
 function createGroup(type) {
   return {
     content: [],
@@ -69,6 +98,48 @@ function createGroup(type) {
   };
 }
 
+function createGroupFromLine(line) {
+  var group = createGroup(line.groupType);
+
+  if (typeof line.level === 'number') {
+    group.meta = { level: line.level };
+  }
+
+  return group;
+}
+
+function getNodeLevel(node) {
+  if (node.type === 'canvas') {
+    return -1;
+  }
+
+  if (!node.meta || typeof node.meta.level !== 'number') {
+    return Infinity;
+  }
+
+  return node.meta.level;
+}
+
 function nodeContainsLine(node, line) {
-  return node.type === line.groupType;
+  var sameType = node.type === line.groupType;
+
+  if (typeof line.level === 'number') {
+    return sameType && line.level === getNodeLevel(node);
+  }
+
+  return sameType;
+}
+
+function nodeContainsNestedLine(node, line) {
+  var nodeLevel = getNodeLevel(node);
+
+  if (typeof line.level !== 'number') {
+    return false;
+  }
+
+  if (node.type !== 'canvas' && node.type !== line.groupType) {
+    return false;
+  }
+
+  return nodeLevel < line.level;
 }

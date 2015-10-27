@@ -38,6 +38,7 @@ describe('converters/json', () => {
     expect(convert(doc).content).to.eql([
       {
         type   : 'unordered-list',
+        meta   : { level: 0 },
         content: [
           {
             type   : 'unordered-list-item',
@@ -54,6 +55,121 @@ describe('converters/json', () => {
             content: '- Baz',
             meta   : { level: 0 },
           },
+        ]
+      },
+      {
+        type   : 'paragraph',
+        content: 'Paragraph',
+      },
+    ]);
+  });
+
+  it('handles nested lists', () => {
+    const doc = parse([
+      `${wrap('unordered-list-1')}- UL-1-0`,
+      `${wrap('unordered-list-2')}- UL-2-0`,
+      `${wrap('unordered-list-2')}- UL-2-1`,
+      `${wrap('unordered-list-3')}- UL-3-0`,
+      `${wrap('unordered-list-2')}- UL-2-2`,
+      `${wrap('unordered-list-0')}- UL-0-0`,
+      `${wrap('ordered-list-2')}1. OL-2-0`,
+      `${wrap('ordered-list-1')}1. OL-1-0`,
+      `${wrap('unordered-list-0')}- UL-0-0`,
+      'Paragraph'
+    ].join('\n'));
+
+    expect(convert(doc).content).to.eql([
+      {
+        type   : 'unordered-list',
+        meta   : { level: 0 },
+        content: [
+          {
+            type   : 'unordered-list',
+            meta   : { level: 1 },
+            content: [
+              {
+                type   : 'unordered-list-item',
+                meta   : { level: 1 },
+                content: '- UL-1-0'
+              },
+              {
+                type   : 'unordered-list',
+                meta   : { level: 2 },
+                content: [
+                  {
+                    type   : 'unordered-list-item',
+                    meta   : { level: 2 },
+                    content: '- UL-2-0'
+                  },
+                  {
+                    type   : 'unordered-list-item',
+                    meta   : { level: 2 },
+                    content: '- UL-2-1'
+                  },
+                  {
+                    type   : 'unordered-list',
+                    meta   : { level: 3 },
+                    content: [
+                      {
+                        type   : 'unordered-list-item',
+                        meta   : { level: 3 },
+                        content: '- UL-3-0'
+                      },
+                    ]
+                  },
+                  {
+                    type   : 'unordered-list-item',
+                    meta   : { level: 2 },
+                    content: '- UL-2-2'
+                  },
+                ]
+              }
+            ]
+          },
+          {
+            type   : 'unordered-list-item',
+            meta   : { level: 0 },
+            content: '- UL-0-0'
+          }
+        ]
+      },
+      {
+        type   : 'ordered-list',
+        meta   : { level: 0 },
+        content: [
+          {
+            type   : 'ordered-list',
+            meta   : { level: 1 },
+            content: [
+              {
+                type   : 'ordered-list',
+                meta   : { level: 2 },
+                content: [
+                  {
+                    type   : 'ordered-list-item',
+                    meta   : { level: 2 },
+                    content: '1. OL-2-0',
+                  },
+                ]
+              },
+              {
+                type   : 'ordered-list-item',
+                meta   : { level: 1 },
+                content: '1. OL-1-0',
+              },
+            ]
+          }
+        ]
+      },
+      {
+        type: 'unordered-list',
+        meta: { level: 0 },
+        content: [
+          {
+            type   : 'unordered-list-item',
+            meta   : { level: 0 },
+            content: '- UL-0-0',
+          }
         ]
       },
       {
