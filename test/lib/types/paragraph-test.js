@@ -7,4 +7,22 @@ describe('Paragraph', () => {
       expect(Paragraph.match('Paragraph')).to.be.an.instanceof(Paragraph);
     });
   });
+
+  describe('#toMarkdown', () => {
+    let line;
+
+    beforeEach(() => {
+      line = Paragraph.match('Foo');
+    });
+
+    it('returns its source with a new line', () => {
+      expect(line.toMarkdown(null, Paragraph.match('Bar')))
+        .to.eql('Foo\n');
+    });
+
+    it('does not return a new line with no next line', () => {
+      expect(line.toMarkdown())
+        .to.eql('Foo');
+    });
+  });
 });
