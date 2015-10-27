@@ -1,9 +1,21 @@
 {
+  "name": "canvas-native",
+  "description": "Utilities for working with the native Canvas format",
+  "version": "1.0.0",
+  "author": "Jonathan Clem <jonathan@usecanvas.com>",
+  "bugs": "https://github.com/usecanvas/canvas-native/issues",
   "devDependencies": {
     "babel": "^5.8.29",
     "chai": "^3.4.0",
     "mocha": "^2.3.3"
   },
+  "homepage": "https://github.com/usecanvas/canvas-native",
+  "keywords": [
+    "canvas",
+    "json",
+    "markdown"
+  ],
+  "repository": "git@github.com:usecanvas/canvas-native.git",
   "scripts": {
     "test": "mocha --compilers js:babel/register \"test/**/*-test.js\""
   }
