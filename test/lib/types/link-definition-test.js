@@ -1,6 +1,5 @@
 import LinkDefinition from '../../../lib/types/link-definition';
 import { expect }     from 'chai';
-import { wrap   }     from '../../../lib/brackets';
 
 describe('LinkDefinition', () => {
   describe('.match', () => {

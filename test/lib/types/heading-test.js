@@ -1,6 +1,5 @@
 import Heading    from '../../../lib/types/heading';
 import { expect } from 'chai';
-import { wrap   } from '../../../lib/brackets';
 
 describe('Heading', () => {
   describe('.match', () => {
