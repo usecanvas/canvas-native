@@ -42,7 +42,8 @@ function convert(native) {
           continue lineLoop;
         }
 
-        currentNode = nodeStack.pop() || json;
+        nodeStack.pop();
+        currentNode = nodeStack[nodeStack.length - 1] || json;
       }
 
       if (!nodeStack.length) {

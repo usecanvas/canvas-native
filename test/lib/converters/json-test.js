@@ -96,6 +96,62 @@ describe('converters/json', () => {
     ]);
   });
 
+  it('does not create consecutive equally-nested lists', () => {
+    const doc = parse([
+      `${wrap('unordered-list-0')}- UL-0-0`,
+      `${wrap('unordered-list-1')}- UL-1-0`,
+      `${wrap('unordered-list-0')}- UL-0-1`,
+      `${wrap('unordered-list-1')}- UL-1-0`,
+      `${wrap('unordered-list-0')}- UL-0-2`,
+    ].join('\n'));
+
+    expect(convert(doc).content).to.eql([
+      {
+        type   : 'unordered-list',
+        meta   : { level: 0 },
+        content: [
+          {
+            type   : 'unordered-list-item',
+            meta   : { level: 0 },
+            content: '- UL-0-0',
+          },
+          {
+            type   : 'unordered-list',
+            meta   : { level: 1 },
+            content: [
+              {
+                  type   : 'unordered-list-item',
+                  meta   : { level: 1 },
+                  content: '- UL-1-0'
+              }
+            ]
+          },
+          {
+            type   : 'unordered-list-item',
+            meta   : { level: 0 },
+            content: '- UL-0-1',
+          },
+          {
+            type   : 'unordered-list',
+            meta   : { level: 1 },
+            content: [
+              {
+                  type   : 'unordered-list-item',
+                  meta   : { level: 1 },
+                  content: '- UL-1-0'
+              }
+            ]
+          },
+          {
+            type   : 'unordered-list-item',
+            meta   : { level: 0 },
+            content: '- UL-0-2',
+          },
+        ]
+      }
+    ]);
+  });
+
   it('handles nested lists', () => {
     const doc = parse([
       `${wrap('unordered-list-1')}- UL-1-0`,
