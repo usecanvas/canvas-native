@@ -67,4 +67,20 @@ describe('converters/markdown', () => {
 
       Paragraph`));
   });
+
+  it('wraps code blocks', () => {
+    const doc = parse([
+      `${wrap('code')}defmodule Foo`,
+      `${wrap('code')}end`,
+      'Paragraph',
+    ].join('\n'));
+
+    expect(convert(doc)).to.eql(trim(`\
+      \`\`\`
+      defmodule Foo
+      end
+      \`\`\`
+
+      Paragraph`));
+  });
 });
