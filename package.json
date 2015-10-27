@@ -1,9 +1,12 @@
 {
   "name": "canvas-native",
   "description": "Utilities for working with the native Canvas format",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "author": "Jonathan Clem <jonathan@usecanvas.com>",
   "bugs": "https://github.com/usecanvas/canvas-native/issues",
+  "dependencies": {
+    "marked": "^0.3.5"
+  },
   "devDependencies": {
     "babel": "^5.8.29",
     "chai": "^3.4.0",
