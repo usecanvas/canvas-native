@@ -1,6 +1,7 @@
-import Checklist from '../../../lib/types/checklist';
-import { expect }    from 'chai';
-import { wrap   }    from '../../../lib/brackets';
+import Checklist  from '../../../lib/types/checklist';
+import Paragraph  from '../../../lib/types/paragraph';
+import { expect } from 'chai';
+import { wrap   } from '../../../lib/brackets';
 
 describe('Checklist', () => {
   describe('.match', () => {
@@ -29,5 +30,27 @@ describe('Checklist', () => {
       expect(Checklist.match(unchecked).isChecked).to.be.false;
     });
   });
-});
 
+  describe('#toMarkdown', () => {
+    let line;
+
+    beforeEach(() => {
+      line = Checklist.match(wrap('checklist-0') + '- [ ] Foo');
+    });
+
+    it('appends a new line at the end of a list', () => {
+      expect(line.toMarkdown(null, Paragraph.match('Foo')))
+        .to.eql('- [ ] Foo\n');
+    });
+
+    it('does not append a new line at the end of the document', () => {
+      expect(line.toMarkdown(null, null))
+        .to.eql('- [ ] Foo');
+    });
+
+    it('does not append a new line mid-list', () => {
+      expect(line.toMarkdown(null, line))
+        .to.eql('- [ ] Foo');
+    });
+  });
+});

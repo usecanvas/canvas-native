@@ -1,3 +1,4 @@
+import Paragraph     from '../../../lib/types/paragraph';
 import UnorderedList from '../../../lib/types/unordered-list';
 import { expect }    from 'chai';
 import { wrap   }    from '../../../lib/brackets';
@@ -21,6 +22,29 @@ describe('UnorderedList', () => {
 
     it('determines its marker', () => {
       expect(line.marker).to.eql('+');
+    });
+  });
+
+  describe('#toMarkdown', () => {
+    let line;
+
+    beforeEach(() => {
+      line = UnorderedList.match(wrap('unordered-list-0') + '- Foo');
+    });
+
+    it('appends a new line at the end of a list', () => {
+      expect(line.toMarkdown(null, Paragraph.match('Foo')))
+        .to.eql('- Foo\n');
+    });
+
+    it('does not append a new line at the end of the document', () => {
+      expect(line.toMarkdown(null, null))
+        .to.eql('- Foo');
+    });
+
+    it('does not append a new line mid-list', () => {
+      expect(line.toMarkdown(null, line))
+        .to.eql('- Foo');
     });
   });
 });
