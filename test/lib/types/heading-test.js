@@ -14,6 +14,19 @@ describe('Heading', () => {
     });
   });
 
+  describe('#toJSON', () => {
+    it('serializes to JSON with its level', () => {
+      const line = Heading.match('#### Foo');
+      expect(line.toJSON()).to.eql({
+        type   : 'heading',
+        content: '#### Foo',
+        meta   : {
+          level: 4
+        }
+      });
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 

@@ -11,6 +11,16 @@ describe('HorizontalRule', () => {
     });
   });
 
+  describe('#toJSON', () => {
+    it('serializes to JSON', () => {
+      const line = HorizontalRule.match('- - -');
+      expect(line.toJSON()).to.eql({
+        type   : 'horizontal-rule',
+        content: '- - -',
+      });
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 

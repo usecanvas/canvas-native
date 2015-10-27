@@ -30,6 +30,14 @@ var Title = (function (_Type) {
   }
 
   _createClass(Title, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[2]
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       var result = '# ' + this.match[2];

@@ -28,6 +28,18 @@ var LinkDefinition = (function (_Type) {
   }
 
   _createClass(LinkDefinition, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[0],
+        meta: {
+          label: this.label,
+          url: this.url
+        }
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       if (!next) {

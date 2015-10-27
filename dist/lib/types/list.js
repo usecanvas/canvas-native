@@ -28,6 +28,15 @@ var List = (function (_Type) {
   }
 
   _createClass(List, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[3],
+        meta: { level: this.level }
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       var result = this.match[3];
@@ -42,6 +51,11 @@ var List = (function (_Type) {
       }
 
       return result;
+    }
+  }, {
+    key: 'groupType',
+    get: function get() {
+      return this.type.replace(/-item$/, '');
     }
   }, {
     key: 'level',

@@ -28,6 +28,14 @@ var HorizontalRule = (function (_Type) {
   }
 
   _createClass(HorizontalRule, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[0]
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       if (!next) {

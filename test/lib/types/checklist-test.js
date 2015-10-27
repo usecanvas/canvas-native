@@ -60,4 +60,18 @@ describe('Checklist', () => {
         .to.eql('- [ ] Foo');
     });
   });
+
+  describe('#toJSON', () => {
+    it('includes its checked status and level', () => {
+      const line = Checklist.match(wrap('checklist-0') + '- [x] Foo');
+      expect(line.toJSON()).to.eql({
+        type   : 'checklist-item',
+        content: '- [x] Foo',
+        meta   : {
+          level  : 0,
+          checked: true,
+        }
+      });
+    });
+  });
 });

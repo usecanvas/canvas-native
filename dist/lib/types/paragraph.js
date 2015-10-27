@@ -28,6 +28,14 @@ var Paragraph = (function (_Type) {
   }
 
   _createClass(Paragraph, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        content: this.match[0],
+        type: this.type
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       if (!next) {

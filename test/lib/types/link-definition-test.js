@@ -22,6 +22,20 @@ describe('LinkDefinition', () => {
     });
   });
 
+  describe('#toJSON', () => {
+    it('serializes to JSON', () => {
+      const line = LinkDefinition.match('[foo]: bar');
+      expect(line.toJSON()).to.eql({
+        type   : 'link-definition',
+        content: '[foo]: bar',
+        meta   : {
+          label: 'foo',
+          url  : 'bar',
+        }
+      });
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 

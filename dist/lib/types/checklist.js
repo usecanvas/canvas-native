@@ -30,6 +30,13 @@ var Checklist = (function (_UnorderedList) {
   }
 
   _createClass(Checklist, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      var json = _get(Object.getPrototypeOf(Checklist.prototype), 'toJSON', this).call(this);
+      json.meta.checked = this.isChecked;
+      return json;
+    }
+  }, {
     key: 'isChecked',
     get: function get() {
       return (/x/i.test(this.match[5])

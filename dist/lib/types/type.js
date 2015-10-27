@@ -16,9 +16,19 @@ var Type = (function () {
   }
 
   _createClass(Type, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      throw new Error('Must implement `toJSON` for each type');
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown() /* prev, next */{
       throw new Error('Must implement `toMarkdown` for each type');
+    }
+  }, {
+    key: 'groupType',
+    get: function get() {
+      return 'canvas';
     }
   }, {
     key: 'type',

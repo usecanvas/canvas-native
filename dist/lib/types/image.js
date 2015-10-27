@@ -30,6 +30,14 @@ var Image = (function (_Type) {
   }
 
   _createClass(Image, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[2]
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       if (!next) {

@@ -28,6 +28,15 @@ var Heading = (function (_Type) {
   }
 
   _createClass(Heading, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[0],
+        meta: { level: this.level }
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       if (!next) {

@@ -30,6 +30,14 @@ var Code = (function (_Type) {
   }
 
   _createClass(Code, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      return {
+        type: this.type,
+        content: this.match[2]
+      };
+    }
+  }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       var result = this.match[2];
@@ -47,6 +55,11 @@ var Code = (function (_Type) {
       }
 
       return result;
+    }
+  }, {
+    key: 'groupType',
+    get: function get() {
+      return 'code-block';
     }
   }], [{
     key: 'name',

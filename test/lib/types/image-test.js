@@ -10,6 +10,16 @@ describe('Image', () => {
     });
   });
 
+  describe('#toJSON', () => {
+    it('serializes to JSON', () => {
+      const line = Image.match(`${wrap('image')}https://example.com/test.png`);
+      expect(line.toJSON()).to.eql({
+        type   : 'image',
+        content: 'https://example.com/test.png',
+      });
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 

@@ -10,6 +10,16 @@ describe('Title', () => {
     });
   });
 
+  describe('#toJSON', () => {
+    it('serializes to JSON', () => {
+      const line = Title.match(`${wrap('doc-heading')}Foo`);
+      expect(line.toJSON()).to.eql({
+        type   : 'title',
+        content: 'Foo',
+      });
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 

@@ -11,6 +11,16 @@ describe('Code', () => {
     });
   });
 
+  describe('#toJSON', () => {
+    it('serializes to JSON', () => {
+      const line = Code.match(wrap('code') + 'alert("ok");');
+      expect(line.toJSON()).to.eql({
+        type   : 'code',
+        content: 'alert("ok");',
+      });
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 
