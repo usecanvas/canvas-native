@@ -21,4 +21,22 @@ describe('LinkDefinition', () => {
       expect(LinkDefinition.match(source).url).to.eql('http://www.example.com');
     });
   });
+
+  describe('#toMarkdown', () => {
+    let line;
+
+    beforeEach(() => {
+      line = LinkDefinition.match('[foo]: bar');
+    });
+
+    it('appends a new line mid-document', () => {
+      expect(line.toMarkdown(line, line))
+        .to.eql('[foo]: bar\n');
+    });
+
+    it('does not append a new line at end of document', () => {
+      expect(line.toMarkdown(line, null))
+        .to.eql('[foo]: bar');
+    });
+  });
 });

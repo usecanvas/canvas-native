@@ -9,4 +9,20 @@ describe('Title', () => {
       expect(Title.match(source)).to.be.an.instanceof(Title);
     });
   });
+
+  describe('#toMarkdown', () => {
+    let line;
+
+    beforeEach(() => {
+      line = Title.match(`${wrap('doc-heading')}Foo`);
+    });
+
+    it('appends a new line mid-document', () => {
+      expect(line.toMarkdown(line, line)).to.eql('# Foo\n');
+    });
+
+    it('does not append a new line at end of document', () => {
+      expect(line.toMarkdown(line, null)).to.eql('# Foo');
+    });
+  });
 });
