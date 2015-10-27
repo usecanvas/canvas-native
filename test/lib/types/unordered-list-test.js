@@ -32,6 +32,14 @@ describe('UnorderedList', () => {
       line = UnorderedList.match(wrap('unordered-list-0') + '- Foo');
     });
 
+    it('reflects its nesting', () => {
+      line = UnorderedList.match(wrap('unordered-list-1') + '* Foo');
+
+      expect(line.toMarkdown(null, null))
+        .to.eql('  * Foo');
+    });
+
+
     it('appends a new line at the end of a list', () => {
       expect(line.toMarkdown(null, Paragraph.match('Foo')))
         .to.eql('- Foo\n');

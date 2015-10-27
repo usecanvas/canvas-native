@@ -17,6 +17,7 @@
   ],
   "repository": "git@github.com:usecanvas/canvas-native.git",
   "scripts": {
+    "build": "rm -rf dist/lib && babel lib -d dist/lib",
     "test": "mocha --compilers js:babel/register \"test/**/*-test.js\""
   }
 }

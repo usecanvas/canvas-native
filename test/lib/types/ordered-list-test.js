@@ -32,6 +32,13 @@ describe('OrderedList', () => {
       line = OrderedList.match(wrap('ordered-list-0') + '1. Foo');
     });
 
+    it('reflects its nesting', () => {
+      line = OrderedList.match(wrap('ordered-list-1') + '1. Foo');
+
+      expect(line.toMarkdown(null, null))
+        .to.eql('  1. Foo');
+    });
+
     it('appends a new line at the end of a list', () => {
       expect(line.toMarkdown(null, Paragraph.match('Foo')))
         .to.eql('1. Foo\n');

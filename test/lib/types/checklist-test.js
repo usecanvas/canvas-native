@@ -38,6 +38,13 @@ describe('Checklist', () => {
       line = Checklist.match(wrap('checklist-0') + '- [ ] Foo');
     });
 
+    it('reflects its nesting', () => {
+      line = Checklist.match(wrap('checklist-1') + '- [ ] Foo');
+
+      expect(line.toMarkdown(null, null))
+        .to.eql('  - [ ] Foo');
+    });
+
     it('appends a new line at the end of a list', () => {
       expect(line.toMarkdown(null, Paragraph.match('Foo')))
         .to.eql('- [ ] Foo\n');
