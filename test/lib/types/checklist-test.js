@@ -4,30 +4,38 @@ import { expect } from 'chai';
 import { wrap   } from '../../../lib/brackets';
 
 describe('Checklist', () => {
-  describe('.match', () => {
-    let line, source;
+  [
+    ['matchNative'  , `${wrap('checklist-1')}+ [x] Foo`],
+    ['matchMarkdown', '  + [x] Foo']
+  ].forEach(([matchType, matchSource]) => {
+    describe(`.${matchType}`, () => {
+      let line;
 
-    beforeEach(() => {
-      source = `${wrap('checklist-1')}+ [x] Foo`;
-      line   = Checklist.match(source);
-    });
+      beforeEach(() => {
+        line = Checklist[matchType](matchSource);
+      });
 
-    it('matches a native UL line', () => {
-      expect(line).to.be.an.instanceof(Checklist);
-    });
+      it('matches a checklist line', () => {
+        expect(line).to.be.an.instanceof(Checklist);
+      });
 
-    it('determines its level', () => {
-      expect(line.level).to.eql(1);
-    });
+      it('determines its level', () => {
+        expect(line.level).to.eql(1);
+      });
 
-    it('determines its marker', () => {
-      expect(line.marker).to.eql('+');
-    });
+      it('determines its marker', () => {
+        expect(line.marker).to.eql('+');
+      });
 
-    it('determines whether it is checked', () => {
-      expect(line.isChecked).to.eql(true);
-      const unchecked = source.replace('x', ' ');
-      expect(Checklist.match(unchecked).isChecked).to.be.false;
+      it('determines whether it is checked', () => {
+        expect(line.isChecked).to.eql(true);
+        const unchecked = matchSource.replace('x', ' ');
+        expect(Checklist[matchType](unchecked).isChecked).to.be.false;
+      });
+
+      it('removes leading space', () => {
+        expect(line.source).to.eql(wrap('checklist-1') + '+ [x] Foo');
+      });
     });
   });
 

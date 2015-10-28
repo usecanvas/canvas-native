@@ -18,6 +18,8 @@ var _type = require('./type');
 
 var _type2 = _interopRequireDefault(_type);
 
+var _brackets = require('../brackets');
+
 var List = (function (_Type) {
   _inherits(List, _Type);
 
@@ -61,6 +63,25 @@ var List = (function (_Type) {
     key: 'level',
     get: function get() {
       return parseInt(this.match[2], 10);
+    }
+  }], [{
+    key: 'buildPrefix',
+    value: function buildPrefix(markdown) {
+      var whitespaceLength = markdown.match(/^( *)/)[1].length;
+      var level = Math.ceil(whitespaceLength / 2);
+      return (0, _brackets.wrap)(this.prefixBase + '-' + level.toString());
+    }
+  }, {
+    key: 'matchMarkdown',
+    value: function matchMarkdown(markdown) {
+      var mdMatch = markdown.match(this.markdownPattern);
+
+      if (!mdMatch) {
+        return null;
+      }
+
+      var nativeString = this.buildPrefix(markdown) + markdown.replace(/^ */, '');
+      return this.match(nativeString);
     }
   }]);
 

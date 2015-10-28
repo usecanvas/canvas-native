@@ -36,14 +36,24 @@ var Type = (function () {
       return typeof this.level === 'number' && this.groupType !== 'canvas';
     }
   }, {
+    key: 'source',
+    get: function get() {
+      return this.match[0];
+    }
+  }, {
     key: 'type',
     get: function get() {
       return this.constructor.name;
     }
   }], [{
+    key: 'buildPrefix',
+    value: function buildPrefix() {
+      return '';
+    }
+  }, {
     key: 'match',
-    value: function match(text) {
-      var match = text.match(this.pattern);
+    value: function match(native) {
+      var match = native.match(this.nativePattern);
 
       if (match) {
         return new this(match);
@@ -52,14 +62,36 @@ var Type = (function () {
       return null;
     }
   }, {
+    key: 'matchMarkdown',
+    value: function matchMarkdown(markdown) {
+      var mdMatch = markdown.match(this.markdownPattern);
+
+      if (!mdMatch) {
+        return null;
+      }
+
+      var nativeString = this.buildPrefix(markdown) + markdown;
+      return this.match(nativeString);
+    }
+  }, {
+    key: 'matchNative',
+    value: function matchNative() {
+      return this.match.apply(this, arguments);
+    }
+  }, {
     key: 'name',
     get: function get() {
       throw new Error('Must implement `name` for each type');
     }
   }, {
-    key: 'pattern',
+    key: 'markdownPattern',
     get: function get() {
-      throw new Error('Must implement `pattern` for each type');
+      throw new Error('Must implement `markdownPattern` for each type');
+    }
+  }, {
+    key: 'nativePattern',
+    get: function get() {
+      throw new Error('Must implement `nativePattern` for each type');
     }
   }]);
 

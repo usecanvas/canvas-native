@@ -21,17 +21,17 @@ import { parse } from 'canvas-native/lib/parser';
 parse(myCanvasString);
 ```
 
-## Converting
+## Formatting
 
-A parsed canvas can be converted into other formats. The available converters
-can be found in `lib/converters`:
+A parsed canvas can be converted into other formats. The available formatters
+can be found in `lib/formatters`:
 
 ```javascript
-import { convert } from 'canvas-native/lib/converters/markdown';
+import format      from 'canvas-native/lib/formatters/markdown';
 import { parse   } from 'canvas-native/lib/parser';
 
 const parsed   = parse(myCanvasString);
-const markdown = convert(parsed);
+const markdown = format(parsed);
 ```
 
 ## Creating Types

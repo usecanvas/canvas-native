@@ -45,12 +45,17 @@ var Paragraph = (function (_Type) {
       return this.match[0] + '\n';
     }
   }], [{
+    key: 'markdownPattern',
+    get: function get() {
+      return this.nativePattern;
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'paragraph';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
       return (/^(.*)$/
       );

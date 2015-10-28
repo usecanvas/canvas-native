@@ -51,12 +51,17 @@ var Heading = (function (_Type) {
       return this.match[1].length;
     }
   }], [{
+    key: 'markdownPattern',
+    get: function get() {
+      return this.nativePattern;
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'heading';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
       return new RegExp('^(#{1,6}) (.*)$');
     }

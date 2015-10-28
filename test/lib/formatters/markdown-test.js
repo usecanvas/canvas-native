@@ -1,18 +1,18 @@
-import { convert } from '../../../lib/converters/markdown';
+import format      from '../../../lib/formatters/markdown';
+import parse       from '../../../lib/parsers/native';
 import { expect  } from 'chai';
-import { parse   } from '../../../lib/parser';
 import { trim    } from '../../helpers';
 import { wrap    } from '../../../lib/brackets';
 
-describe('converters/markdown', () => {
-  it('converts simple paragraphs to markdown', () => {
+describe('formatters/markdown', () => {
+  it('formats simple paragraphs as markdown', () => {
     const doc = parse([
       'Foo',
       'Bar',
       'Baz',
     ].join('\n'));
 
-    expect(convert(doc)).to.eql(trim(`\
+    expect(format(doc)).to.eql(trim(`\
       Foo
 
       Bar
@@ -28,7 +28,7 @@ describe('converters/markdown', () => {
       'Paragraph'
     ].join('\n'));
 
-    expect(convert(doc)).to.eql(trim(`\
+    expect(format(doc)).to.eql(trim(`\
       - Foo
       - Bar
       - Baz
@@ -44,7 +44,7 @@ describe('converters/markdown', () => {
       'Paragraph'
     ].join('\n'));
 
-    expect(convert(doc)).to.eql(trim(`\
+    expect(format(doc)).to.eql(trim(`\
       1. Foo
       2. Bar
       3. Baz
@@ -60,7 +60,7 @@ describe('converters/markdown', () => {
       'Paragraph'
     ].join('\n'));
 
-    expect(convert(doc)).to.eql(trim(`\
+    expect(format(doc)).to.eql(trim(`\
       - [ ] Foo
       - [x] Bar
       - [ ] Baz
@@ -75,7 +75,7 @@ describe('converters/markdown', () => {
       'Paragraph',
     ].join('\n'));
 
-    expect(convert(doc)).to.eql(trim(`\
+    expect(format(doc)).to.eql(trim(`\
       \`\`\`
       defmodule Foo
       end

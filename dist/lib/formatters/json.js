@@ -3,9 +3,9 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports.convert = convert;
+exports['default'] = format;
 
-function convert(native) {
+function format(native) {
   var json = createCanvas(native);
 
   var nodeStack = [json];
@@ -179,3 +179,4 @@ function nodeContainsNestedLine(node, line) {
 
   return nodeLevel < line.level;
 }
+module.exports = exports['default'];

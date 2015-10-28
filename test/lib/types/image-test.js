@@ -10,6 +10,39 @@ describe('Image', () => {
     });
   });
 
+  describe('.matchMarkdown', () => {
+    let url = 'https://example.com/foo.png?foo=bar';
+
+    it('matches an image', () => {
+      expect(Image.matchMarkdown(url))
+        .to.be.an.instanceof(Image);
+    });
+
+    it('matches an image with alt text and a title', () => {
+      const line =
+        Image.matchMarkdown(`![Alt text](${url} "title")`);
+      expect(line)
+        .to.be.an.instanceof(Image);
+      expect(line.source).to.eql(wrap('image') + url);
+    });
+
+    it('matches an image no alt text and a title', () => {
+      const line =
+        Image.matchMarkdown(`![](${url} "title")`);
+      expect(line)
+        .to.be.an.instanceof(Image);
+      expect(line.source).to.eql(wrap('image') + url);
+    });
+
+    it('matches an image alt text and no title', () => {
+      const line =
+        Image.matchMarkdown(`![](${url})`);
+      expect(line)
+        .to.be.an.instanceof(Image);
+      expect(line.source).to.eql(wrap('image') + url);
+    });
+  });
+
   describe('#toJSON', () => {
     it('serializes to JSON', () => {
       const line = Image.match(`${wrap('image')}https://example.com/test.png`);

@@ -20,6 +20,8 @@ var _list2 = _interopRequireDefault(_list);
 
 var _brackets = require('../brackets');
 
+var MARKDOWN_MATCH = ' *((\\d+)\\. (.*))';
+
 var OrderedList = (function (_List) {
   _inherits(OrderedList, _List);
 
@@ -35,14 +37,24 @@ var OrderedList = (function (_List) {
       return parseInt(this.match[4], 10);
     }
   }], [{
+    key: 'markdownPattern',
+    get: function get() {
+      return new RegExp('^' + MARKDOWN_MATCH + '$');
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'ordered-list-item';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
-      return new RegExp('^(' + (0, _brackets.wrap)('ordered-list-(\\d+)') + ')((\\d+)\\. (.*))$');
+      return new RegExp('^(' + (0, _brackets.wrap)(this.prefixBase + '-(\\d+)') + ')' + MARKDOWN_MATCH + '$');
+    }
+  }, {
+    key: 'prefixBase',
+    get: function get() {
+      return 'ordered-list';
     }
   }]);
 

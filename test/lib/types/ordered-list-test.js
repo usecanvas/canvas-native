@@ -4,24 +4,32 @@ import { expect }  from 'chai';
 import { wrap   }  from '../../../lib/brackets';
 
 describe('OrderedList', () => {
-  describe('.match', () => {
-    let line;
+  [
+    ['matchNative'  , `${wrap('ordered-list-1')}2. Foo`],
+    ['matchMarkdown', '  2. Foo']
+  ].forEach(([matchType, matchSource]) => {
+    describe(`.${matchType}`, () => {
+      let line;
 
-    beforeEach(() => {
-      const source = `${wrap('ordered-list-1')}2. Foo`;
-      line = OrderedList.match(source);
-    });
+      beforeEach(() => {
+        line = OrderedList[matchType](matchSource);
+      });
 
-    it('matches a native OL line', () => {
-      expect(line).to.be.an.instanceof(OrderedList);
-    });
+      it('matches an ordered list line', () => {
+        expect(line).to.be.an.instanceof(OrderedList);
+      });
 
-    it('determines its level', () => {
-      expect(line.level).to.eql(1);
-    });
+      it('determines its level', () => {
+        expect(line.level).to.eql(1);
+      });
 
-    it('determines its number', () => {
-      expect(line.number).to.eql(2);
+      it('determines its number', () => {
+        expect(line.number).to.eql(2);
+      });
+
+      it('removes leading space', () => {
+        expect(line.source).to.eql(wrap('ordered-list-1') + '2. Foo');
+      });
     });
   });
 

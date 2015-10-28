@@ -5,9 +5,22 @@ import { wrap   } from '../../../lib/brackets';
 
 describe('Code', () => {
   describe('.match', () => {
-    it('matches a normal text line', () => {
+    it('matches code', () => {
       const source = `${wrap('code')}Code`;
       expect(Code.match(source)).to.be.an.instanceof(Code);
+    });
+  });
+
+  describe('.matchMarkdown', () => {
+    it('matches code', () => {
+      const source = 'Code';
+      expect(Code.matchMarkdown(source, { groupType: 'code' }))
+        .to.be.an.instanceof(Code);
+    });
+
+    it('ignores code not in a code group', () => {
+      const source = 'Code';
+      expect(Code.matchMarkdown(source)).to.be.null;
     });
   });
 

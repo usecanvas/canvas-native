@@ -2,23 +2,25 @@ import LinkDefinition from '../../../lib/types/link-definition';
 import { expect }     from 'chai';
 
 describe('LinkDefinition', () => {
-  describe('.match', () => {
-    let source;
+  ['matchNative', 'matchMarkdown'].forEach(matchType => {
+    describe(`.${matchType}`, () => {
+      let source;
 
-    beforeEach(() => {
-      source = '[foo]: http://www.example.com';
-    });
+      beforeEach(() => {
+        source = '[foo]: http://www.example.com';
+      });
 
-    it('matches a link definition', () => {
-      expect(LinkDefinition.match(source)).to.be.an.instanceof(LinkDefinition);
-    });
+      it('matches a link definition', () => {
+        expect(LinkDefinition[matchType](source)).to.be.an.instanceof(LinkDefinition);
+      });
 
-    it('determines its label', () => {
-      expect(LinkDefinition.match(source).label).to.eql('foo');
-    });
+      it('determines its label', () => {
+        expect(LinkDefinition[matchType](source).label).to.eql('foo');
+      });
 
-    it('determines its URL', () => {
-      expect(LinkDefinition.match(source).url).to.eql('http://www.example.com');
+      it('determines its URL', () => {
+        expect(LinkDefinition[matchType](source).url).to.eql('http://www.example.com');
+      });
     });
   });
 
