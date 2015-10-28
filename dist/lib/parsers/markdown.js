@@ -77,11 +77,9 @@ function parse(markdown) {
         throw new Error('No matching type for source "' + source + '"');
       }
 
-      if (line.type === 'title') {
-        context.hasTitle = true;
-      }
-
       result.push(line);
+
+      context.hasTitle = true; // Only the first line is eligible
     }
   } catch (err) {
     _didIteratorError = true;

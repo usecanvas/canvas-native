@@ -30,8 +30,6 @@ describe('parsers/markdown', () => {
 
     const parsed = parse(markdown);
 
-    console.log(parsed.map(p => p.source));
-
     expect(parsed.map(n => n.source)).to.eql([
       `${wrap('doc-heading')}Title`,
       '# Heading',
@@ -47,6 +45,14 @@ describe('parsers/markdown', () => {
       `${wrap('code')}  end`,
       `${wrap('code')}end`,
       'Paragraph',
+    ]);
+  });
+
+  it('only allows the first line to be a title', () => {
+    const markdown = '\n# Foo';
+    expect(parse(markdown).map(n => n.source)).to.eql([
+      '',
+      '# Foo'
     ]);
   });
 });
