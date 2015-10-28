@@ -36,6 +36,11 @@ describe('Checklist', () => {
       it('removes leading space', () => {
         expect(line.source).to.eql(wrap('checklist-1') + '+ [x] Foo');
       });
+
+      it('parses uppercase X', () => {
+        line = Checklist[matchType](matchSource.replace(/x/, 'X'));
+        expect(line).to.be.an.instanceof(Checklist);
+      });
     });
   });
 

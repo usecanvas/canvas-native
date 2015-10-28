@@ -47,7 +47,7 @@ var Checklist = (function (_UnorderedList) {
   }], [{
     key: 'markdownPattern',
     get: function get() {
-      return new RegExp('^' + MARKDOWN_MATCH + '$');
+      return new RegExp('^' + MARKDOWN_MATCH + '$', 'i');
     }
   }, {
     key: 'name',
