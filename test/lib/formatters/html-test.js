@@ -1,6 +1,6 @@
 import format      from '../../../lib/formatters/html';
+import parse       from '../../../lib/parsers/native';
 import { expect  } from 'chai';
-import { parse   } from '../../../lib/parser';
 import { trim    } from '../../helpers';
 
 describe('formatters/html', () => {

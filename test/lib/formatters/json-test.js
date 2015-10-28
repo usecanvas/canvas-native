@@ -1,6 +1,6 @@
 import format      from '../../../lib/formatters/json';
+import parse       from '../../../lib/parsers/native';
 import { expect  } from 'chai';
-import { parse   } from '../../../lib/parser';
 import { wrap    } from '../../../lib/brackets';
 
 describe('formatters/json', () => {

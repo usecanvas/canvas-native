@@ -1,6 +1,6 @@
-import format from '../../../lib/formatters/markdown';
+import format      from '../../../lib/formatters/markdown';
+import parse       from '../../../lib/parsers/native';
 import { expect  } from 'chai';
-import { parse   } from '../../../lib/parser';
 import { trim    } from '../../helpers';
 import { wrap    } from '../../../lib/brackets';
 
