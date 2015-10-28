@@ -1,27 +1,27 @@
-import { convert } from '../../../lib/converters/json';
+import format      from '../../../lib/formatters/json';
 import { expect  } from 'chai';
 import { parse   } from '../../../lib/parser';
 import { wrap    } from '../../../lib/brackets';
 
-describe('converters/json', () => {
+describe('formatters/json', () => {
   it('includes a title', () => {
     const doc = parse([
       wrap('doc-heading') + 'Foo'
     ].join('\n'));
 
-    expect(convert(doc).meta).to.eql({
+    expect(format(doc).meta).to.eql({
       title: 'Foo'
     });
   });
 
-  it('converts simple paragraphs to JSON', () => {
+  it('formats simple paragraphs as JSON', () => {
     const doc = parse([
       'Foo',
       'Bar',
       'Baz',
     ].join('\n'));
 
-    expect(convert(doc).content).to.eql([
+    expect(format(doc).content).to.eql([
       {
         type   : 'paragraph',
         content: 'Foo',
@@ -45,7 +45,7 @@ describe('converters/json', () => {
       'Paragraph'
     ].join('\n'));
 
-    expect(convert(doc).content).to.eql([
+    expect(format(doc).content).to.eql([
       {
         type   : 'unordered-list',
         meta   : { level: 0 },
@@ -80,7 +80,7 @@ describe('converters/json', () => {
       `${wrap('unordered-list-1')}- UL-1-0`,
     ].join('\n'));
 
-    expect(convert(doc).content).to.eql([
+    expect(format(doc).content).to.eql([
       {
         type   : 'heading',
         meta   : { level: 1 },
@@ -115,7 +115,7 @@ describe('converters/json', () => {
       `${wrap('unordered-list-0')}- UL-0-2`,
     ].join('\n'));
 
-    expect(convert(doc).content).to.eql([
+    expect(format(doc).content).to.eql([
       {
         type   : 'unordered-list',
         meta   : { level: 0 },
@@ -176,7 +176,7 @@ describe('converters/json', () => {
       'Paragraph'
     ].join('\n'));
 
-    expect(convert(doc).content).to.eql([
+    expect(format(doc).content).to.eql([
       {
         type   : 'unordered-list',
         meta   : { level: 0 },
@@ -284,7 +284,7 @@ describe('converters/json', () => {
       'Paragraph',
     ].join('\n'));
 
-    expect(convert(doc).content).to.eql([
+    expect(format(doc).content).to.eql([
       {
         type   : 'code-block',
         content: [

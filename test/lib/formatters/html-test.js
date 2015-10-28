@@ -1,17 +1,17 @@
-import { convert } from '../../../lib/converters/html';
+import format      from '../../../lib/formatters/html';
 import { expect  } from 'chai';
 import { parse   } from '../../../lib/parser';
 import { trim    } from '../../helpers';
 
-describe('converters/html', () => {
-  it('converts documents to HTML', () => {
+describe('formatters/html', () => {
+  it('formats documents as HTML', () => {
     const doc = parse([
       'Foo',
       'Bar',
       'Baz',
     ].join('\n'));
 
-    expect(convert(doc)).to.eql(trim(`\
+    expect(format(doc)).to.eql(trim(`\
       <p>Foo</p>
       <p>Bar</p>
       <p>Baz</p>\n`));
