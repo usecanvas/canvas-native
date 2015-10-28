@@ -11,6 +11,19 @@ describe('Code', () => {
     });
   });
 
+  describe('.matchMarkdown', () => {
+    it('matches code', () => {
+      const source = 'Code';
+      expect(Code.matchMarkdown(source, { groupType: 'code' }))
+        .to.be.an.instanceof(Code);
+    });
+
+    it('ignores code not in a code group', () => {
+      const source = 'Code';
+      expect(Code.matchMarkdown(source)).to.be.null;
+    });
+  });
+
   describe('#toJSON', () => {
     it('serializes to JSON', () => {
       const line = Code.match(wrap('code') + 'alert("ok");');

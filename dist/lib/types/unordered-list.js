@@ -20,6 +20,8 @@ var _list2 = _interopRequireDefault(_list);
 
 var _brackets = require('../brackets');
 
+var MARKDOWN_MATCH = ' *(([\\*\\-\\+]) (.*))';
+
 var UnorderedList = (function (_List) {
   _inherits(UnorderedList, _List);
 
@@ -35,14 +37,24 @@ var UnorderedList = (function (_List) {
       return this.match[4];
     }
   }], [{
+    key: 'markdownPattern',
+    get: function get() {
+      return new RegExp('^' + MARKDOWN_MATCH + '$');
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'unordered-list-item';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
-      return new RegExp('^(' + (0, _brackets.wrap)('unordered-list-(\\d+)') + ')(([\\*\\-\\+]) (.*))$');
+      return new RegExp('^(' + (0, _brackets.wrap)('unordered-list-(\\d+)') + ')' + MARKDOWN_MATCH + '$');
+    }
+  }, {
+    key: 'prefixBase',
+    get: function get() {
+      return 'unordered-list';
     }
   }]);
 

@@ -47,12 +47,37 @@ var Image = (function (_Type) {
       return this.match[2] + '\n';
     }
   }], [{
+    key: 'buildPrefix',
+    value: function buildPrefix() {
+      return (0, _brackets.wrap)('image');
+    }
+  }, {
+    key: 'matchMarkdown',
+    value: function matchMarkdown(markdown) {
+      var mdMatch = markdown.match(this.markdownPattern);
+
+      if (!mdMatch) {
+        return null;
+      }
+
+      markdown = mdMatch[1];
+
+      var nativeString = this.buildPrefix(markdown) + markdown;
+      return this.match(nativeString);
+    }
+  }, {
+    key: 'markdownPattern',
+    get: function get() {
+      return (/^(?:!\[.*?\]\()?(https?:\/\/.+\/.+\.(?:gif|jpg|jpeg|png)(?:\?[^\s)]+)?).*?\)?$/i
+      );
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'image';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
       return new RegExp('^(' + (0, _brackets.wrap)('image') + ')(.*)$');
     }

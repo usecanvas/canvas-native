@@ -11,6 +11,15 @@ describe('HorizontalRule', () => {
     });
   });
 
+  describe('.matchMarkdown', () => {
+    it('matches a horizontal rule', () => {
+      expect(HorizontalRule.matchMarkdown('---'))
+        .to.be.an.instanceof(HorizontalRule);
+      expect(HorizontalRule.matchMarkdown('- - -'))
+        .to.be.an.instanceof(HorizontalRule);
+    });
+  });
+
   describe('#toJSON', () => {
     it('serializes to JSON', () => {
       const line = HorizontalRule.match('- - -');

@@ -10,6 +10,23 @@ describe('Title', () => {
     });
   });
 
+  describe('.matchMarkdown', () => {
+    const source = '# Title';
+
+    it('matches an H1 line', () => {
+      expect(Title.matchMarkdown(source)).to.be.an.instanceof(Title);
+    });
+
+    it('ignores titles when one exists', () => {
+      expect(Title.matchMarkdown(source, { hasTitle: true })).to.be.null;
+    });
+
+    it('stripes the hash', () => {
+      expect(Title.matchMarkdown(source).source)
+        .to.eql(`${wrap('doc-heading')}Title`);
+    });
+  });
+
   describe('#toJSON', () => {
     it('serializes to JSON', () => {
       const line = Title.match(`${wrap('doc-heading')}Foo`);

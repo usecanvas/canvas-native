@@ -4,24 +4,32 @@ import { expect }    from 'chai';
 import { wrap   }    from '../../../lib/brackets';
 
 describe('UnorderedList', () => {
-  describe('.match', () => {
-    let line;
+  [
+    ['matchNative'  , `${wrap('unordered-list-1')}+ Foo`],
+    ['matchMarkdown', '  + Foo']
+  ].forEach(([matchType, matchSource]) => {
+    describe(`.${matchType}`, () => {
+      let line;
 
-    beforeEach(() => {
-      const source = `${wrap('unordered-list-1')}+ Foo`;
-      line = UnorderedList.match(source);
-    });
+      beforeEach(() => {
+        line = UnorderedList[matchType](matchSource);
+      });
 
-    it('matches a native UL line', () => {
-      expect(line).to.be.an.instanceof(UnorderedList);
-    });
+      it('matches an unordered list line', () => {
+        expect(line).to.be.an.instanceof(UnorderedList);
+      });
 
-    it('determines its level', () => {
-      expect(line.level).to.eql(1);
-    });
+      it('determines its level', () => {
+        expect(line.level).to.eql(1);
+      });
 
-    it('determines its marker', () => {
-      expect(line.marker).to.eql('+');
+      it('determines its marker', () => {
+        expect(line.marker).to.eql('+');
+      });
+
+      it('removes leading space', () => {
+        expect(line.source).to.eql(wrap('unordered-list-1') + '+ Foo');
+      });
     });
   });
 

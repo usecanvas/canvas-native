@@ -20,6 +20,8 @@ var _unorderedList2 = _interopRequireDefault(_unorderedList);
 
 var _brackets = require('../brackets');
 
+var MARKDOWN_MATCH = ' *(([\\-\\+\\*]) \\[([x ])\\] (.*))';
+
 var Checklist = (function (_UnorderedList) {
   _inherits(Checklist, _UnorderedList);
 
@@ -43,14 +45,24 @@ var Checklist = (function (_UnorderedList) {
       );
     }
   }], [{
+    key: 'markdownPattern',
+    get: function get() {
+      return new RegExp('^' + MARKDOWN_MATCH + '$');
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'checklist-item';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
-      return new RegExp('^(' + (0, _brackets.wrap)('checklist-(\\d+)') + ')(([\\-\\+\\*]) \\[([x ])\\] (.*))$', 'i');
+      return new RegExp('^(' + (0, _brackets.wrap)(this.prefixBase + '-(\\d+)') + ')' + MARKDOWN_MATCH + '$', 'i');
+    }
+  }, {
+    key: 'prefixBase',
+    get: function get() {
+      return 'checklist';
     }
   }]);
 

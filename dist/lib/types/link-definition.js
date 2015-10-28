@@ -59,12 +59,17 @@ var LinkDefinition = (function (_Type) {
       return this.match[3];
     }
   }], [{
+    key: 'markdownPattern',
+    get: function get() {
+      return this.nativePattern;
+    }
+  }, {
     key: 'name',
     get: function get() {
       return 'link-definition';
     }
   }, {
-    key: 'pattern',
+    key: 'nativePattern',
     get: function get() {
       return (/^(\[(\S+)\]: (.+))$/
       );

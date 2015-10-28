@@ -8,6 +8,14 @@ describe('Paragraph', () => {
     });
   });
 
+  describe('.matchMarkdown', () => {
+    it('matches a paragraph', () => {
+      const match = Paragraph.matchMarkdown('Foo');
+      expect(match).to.be.an.instanceof(Paragraph);
+      expect(match.source).to.eql('Foo');
+    });
+  });
+
   describe('#toMarkdown', () => {
     let line;
 

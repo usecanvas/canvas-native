@@ -14,6 +14,18 @@ describe('Heading', () => {
     });
   });
 
+  describe('.matchMarkdown', () => {
+    it('matches a normal heading line', () => {
+      const source = `# Heading`;
+      expect(Heading.matchMarkdown(source)).to.be.an.instanceof(Heading);
+    });
+
+    it('determines its level', () => {
+      const source = `## Heading`;
+      expect(Heading.matchMarkdown(source).level).to.eql(2);
+    });
+  });
+
   describe('#toJSON', () => {
     it('serializes to JSON with its level', () => {
       const line = Heading.match('#### Foo');
