@@ -5,7 +5,7 @@ import { wrap   } from '../../../lib/brackets';
 
 describe('Code', () => {
   describe('.match', () => {
-    it('matches a normal text line', () => {
+    it('matches code', () => {
       const source = `${wrap('code')}Code`;
       expect(Code.match(source)).to.be.an.instanceof(Code);
     });
