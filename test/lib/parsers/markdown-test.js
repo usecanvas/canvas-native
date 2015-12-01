@@ -26,6 +26,9 @@ describe('parsers/markdown', () => {
       end
       \`\`\`
 
+      > Foo
+      > Bar
+
       Paragraph`);
 
     const parsed = parse(markdown);
@@ -44,6 +47,8 @@ describe('parsers/markdown', () => {
       `${wrap('code')}`,
       `${wrap('code')}  end`,
       `${wrap('code')}end`,
+      `${wrap('blockquote')}> Foo`,
+      `${wrap('blockquote')}> Bar`,
       'Paragraph',
     ]);
   });

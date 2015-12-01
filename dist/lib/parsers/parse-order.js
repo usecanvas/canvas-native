@@ -6,6 +6,10 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _typesBlockquote = require('../types/blockquote');
+
+var _typesBlockquote2 = _interopRequireDefault(_typesBlockquote);
+
 var _typesChecklist = require('../types/checklist');
 
 var _typesChecklist2 = _interopRequireDefault(_typesChecklist);
@@ -46,5 +50,5 @@ var _typesUnorderedList = require('../types/unordered-list');
 
 var _typesUnorderedList2 = _interopRequireDefault(_typesUnorderedList);
 
-exports['default'] = [_typesChecklist2['default'], _typesCode2['default'], _typesTitle2['default'], _typesHeading2['default'], _typesHorizontalRule2['default'], _typesImage2['default'], _typesLinkDefinition2['default'], _typesOrderedList2['default'], _typesUnorderedList2['default'], _typesParagraph2['default']];
+exports['default'] = [_typesChecklist2['default'], _typesBlockquote2['default'], _typesCode2['default'], _typesTitle2['default'], _typesHeading2['default'], _typesHorizontalRule2['default'], _typesImage2['default'], _typesLinkDefinition2['default'], _typesOrderedList2['default'], _typesUnorderedList2['default'], _typesParagraph2['default']];
 module.exports = exports['default'];
