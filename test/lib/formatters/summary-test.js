@@ -8,6 +8,7 @@ describe('formatters/summary', () => {
       '# Title',
       'Foo. ',
       'Bar...',
+      '   ',
       '- Baz *qux* [asdf](http://www.example.com)',
       'Foobarbaz Foobarbaz Foobarbaz Foobarbaz Foobarbaz Foobarbaz ',
       'Foobarbaz Foobarbaz Foobarbaz Foobarbaz Foobarbaz Foobarbaz ',

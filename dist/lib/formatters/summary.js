@@ -42,7 +42,13 @@ function format(native) {
         continue;
       }
 
-      var next = (0, _removeMarkdown2['default'])(current.content.trim()).replace(/\.?$/, '. ');
+      var nextContent = current.content.trim();
+
+      if (!nextContent) {
+        continue;
+      }
+
+      var next = (0, _removeMarkdown2['default'])(nextContent).replace(/\.?$/, '. ');
 
       if (next.length + result.length > 256) {
         var nextParts = next.split(/\W/);
