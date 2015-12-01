@@ -30,6 +30,10 @@ function format(native) {
       var current = _step$value[1];
       var next = _step$value[2];
 
+      if (!current.toMarkdown) {
+        continue;
+      }
+
       result.push(current.toMarkdown(prev, next));
     }
   } catch (err) {

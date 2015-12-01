@@ -54,6 +54,10 @@ function parse(markdown) {
         for (var _iterator2 = _parseOrder2['default'][Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var klass = _step2.value;
 
+          if (!klass.matchMarkdown) {
+            continue;
+          }
+
           if (line = klass.matchMarkdown(source, context)) {
             break;
           }
