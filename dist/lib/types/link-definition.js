@@ -32,7 +32,7 @@ var LinkDefinition = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[0],
+        content: this.content,
         meta: {
           label: this.label,
           url: this.url
@@ -47,6 +47,16 @@ var LinkDefinition = (function (_Type) {
       }
 
       return this.match[0] + '\n';
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[3];
+    }
+  }, {
+    key: 'isSummarized',
+    get: function get() {
+      return false;
     }
   }, {
     key: 'label',

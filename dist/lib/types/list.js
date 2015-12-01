@@ -34,7 +34,7 @@ var List = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[3],
+        content: this.content,
         meta: { level: this.level }
       };
     }

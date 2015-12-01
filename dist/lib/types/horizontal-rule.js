@@ -32,7 +32,7 @@ var HorizontalRule = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[0]
+        content: this.content
       };
     }
   }, {
@@ -43,6 +43,16 @@ var HorizontalRule = (function (_Type) {
       }
 
       return this.match[0] + '\n';
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return '';
+    }
+  }, {
+    key: 'isSummarized',
+    get: function get() {
+      return false;
     }
   }], [{
     key: 'markdownPattern',

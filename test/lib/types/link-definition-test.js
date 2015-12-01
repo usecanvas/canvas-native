@@ -29,7 +29,7 @@ describe('LinkDefinition', () => {
       const line = LinkDefinition.match('[foo]: bar');
       expect(line.toJSON()).to.eql({
         type   : 'link-definition',
-        content: '[foo]: bar',
+        content: 'bar',
         meta   : {
           label: 'foo',
           url  : 'bar',

@@ -21,7 +21,7 @@ describe('Heading', () => {
       const line = Heading.match('#### Foo');
       expect(line.toJSON()).to.eql({
         type   : 'heading',
-        content: '#### Foo',
+        content: 'Foo',
         meta   : {
           level: 4
         }

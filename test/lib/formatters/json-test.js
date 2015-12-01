@@ -52,17 +52,17 @@ describe('formatters/json', () => {
         content: [
           {
             type   : 'unordered-list-item',
-            content: '- Foo',
+            content: 'Foo',
             meta   : { level: 0 },
           },
           {
             type   : 'unordered-list-item',
-            content: '- Bar',
+            content: 'Bar',
             meta   : { level: 0 },
           },
           {
             type   : 'unordered-list-item',
-            content: '- Baz',
+            content: 'Baz',
             meta   : { level: 0 },
           },
         ]
@@ -84,7 +84,7 @@ describe('formatters/json', () => {
       {
         type   : 'heading',
         meta   : { level: 1 },
-        content: '# Header',
+        content: 'Header',
       },
       {
         type   : 'unordered-list',
@@ -97,7 +97,7 @@ describe('formatters/json', () => {
               {
                 type   : 'unordered-list-item',
                 meta   : { level: 1 },
-                content: '- UL-1-0'
+                content: 'UL-1-0'
               }
             ]
           }
@@ -123,7 +123,7 @@ describe('formatters/json', () => {
           {
             type   : 'unordered-list-item',
             meta   : { level: 0 },
-            content: '- UL-0-0',
+            content: 'UL-0-0',
           },
           {
             type   : 'unordered-list',
@@ -132,14 +132,14 @@ describe('formatters/json', () => {
               {
                   type   : 'unordered-list-item',
                   meta   : { level: 1 },
-                  content: '- UL-1-0'
+                  content: 'UL-1-0'
               }
             ]
           },
           {
             type   : 'unordered-list-item',
             meta   : { level: 0 },
-            content: '- UL-0-1',
+            content: 'UL-0-1',
           },
           {
             type   : 'unordered-list',
@@ -148,14 +148,14 @@ describe('formatters/json', () => {
               {
                   type   : 'unordered-list-item',
                   meta   : { level: 1 },
-                  content: '- UL-1-0'
+                  content: 'UL-1-0'
               }
             ]
           },
           {
             type   : 'unordered-list-item',
             meta   : { level: 0 },
-            content: '- UL-0-2',
+            content: 'UL-0-2',
           },
         ]
       }
@@ -188,7 +188,7 @@ describe('formatters/json', () => {
               {
                 type   : 'unordered-list-item',
                 meta   : { level: 1 },
-                content: '- UL-1-0'
+                content: 'UL-1-0'
               },
               {
                 type   : 'unordered-list',
@@ -197,12 +197,12 @@ describe('formatters/json', () => {
                   {
                     type   : 'unordered-list-item',
                     meta   : { level: 2 },
-                    content: '- UL-2-0'
+                    content: 'UL-2-0'
                   },
                   {
                     type   : 'unordered-list-item',
                     meta   : { level: 2 },
-                    content: '- UL-2-1'
+                    content: 'UL-2-1'
                   },
                   {
                     type   : 'unordered-list',
@@ -211,14 +211,14 @@ describe('formatters/json', () => {
                       {
                         type   : 'unordered-list-item',
                         meta   : { level: 3 },
-                        content: '- UL-3-0'
+                        content: 'UL-3-0'
                       },
                     ]
                   },
                   {
                     type   : 'unordered-list-item',
                     meta   : { level: 2 },
-                    content: '- UL-2-2'
+                    content: 'UL-2-2'
                   },
                 ]
               }
@@ -227,7 +227,7 @@ describe('formatters/json', () => {
           {
             type   : 'unordered-list-item',
             meta   : { level: 0 },
-            content: '- UL-0-0'
+            content: 'UL-0-0'
           }
         ]
       },
@@ -246,14 +246,14 @@ describe('formatters/json', () => {
                   {
                     type   : 'ordered-list-item',
                     meta   : { level: 2 },
-                    content: '1. OL-2-0',
+                    content: 'OL-2-0',
                   },
                 ]
               },
               {
                 type   : 'ordered-list-item',
                 meta   : { level: 1 },
-                content: '1. OL-1-0',
+                content: 'OL-1-0',
               },
             ]
           }
@@ -266,7 +266,7 @@ describe('formatters/json', () => {
           {
             type   : 'unordered-list-item',
             meta   : { level: 0 },
-            content: '- UL-0-0',
+            content: 'UL-0-0',
           }
         ]
       },

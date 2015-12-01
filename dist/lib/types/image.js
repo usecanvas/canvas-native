@@ -34,7 +34,7 @@ var Image = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[2]
+        content: this.content
       };
     }
   }, {
@@ -45,6 +45,11 @@ var Image = (function (_Type) {
       }
 
       return this.match[2] + '\n';
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[2];
     }
   }], [{
     key: 'buildPrefix',

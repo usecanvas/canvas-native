@@ -31,7 +31,7 @@ var Paragraph = (function (_Type) {
     key: 'toJSON',
     value: function toJSON() {
       return {
-        content: this.match[0],
+        content: this.content,
         type: this.type
       };
     }
@@ -43,6 +43,11 @@ var Paragraph = (function (_Type) {
       }
 
       return this.match[0] + '\n';
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[0];
     }
   }], [{
     key: 'markdownPattern',

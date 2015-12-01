@@ -32,6 +32,11 @@ var OrderedList = (function (_List) {
   }
 
   _createClass(OrderedList, [{
+    key: 'content',
+    get: function get() {
+      return this.match[5];
+    }
+  }, {
     key: 'number',
     get: function get() {
       return parseInt(this.match[4], 10);

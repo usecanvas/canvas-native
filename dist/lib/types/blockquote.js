@@ -35,7 +35,7 @@ var Blockquote = (function (_Type) {
     key: 'toJSON',
     value: function toJSON() {
       return {
-        content: this.match[2],
+        content: this.content,
         type: this.type
       };
     }
@@ -49,6 +49,11 @@ var Blockquote = (function (_Type) {
       }
 
       return result;
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[4];
     }
   }, {
     key: 'groupType',

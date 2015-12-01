@@ -34,7 +34,7 @@ var Title = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[2]
+        content: this.content
       };
     }
   }, {
@@ -47,6 +47,16 @@ var Title = (function (_Type) {
       }
 
       return result + '\n';
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[2];
+    }
+  }, {
+    key: 'isSummarized',
+    get: function get() {
+      return false;
     }
   }], [{
     key: 'buildPrefix',

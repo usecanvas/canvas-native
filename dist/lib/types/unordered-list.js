@@ -32,6 +32,11 @@ var UnorderedList = (function (_List) {
   }
 
   _createClass(UnorderedList, [{
+    key: 'content',
+    get: function get() {
+      return this.match[5];
+    }
+  }, {
     key: 'marker',
     get: function get() {
       return this.match[4];

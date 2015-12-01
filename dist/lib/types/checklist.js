@@ -39,6 +39,11 @@ var Checklist = (function (_UnorderedList) {
       return json;
     }
   }, {
+    key: 'content',
+    get: function get() {
+      return this.match[6];
+    }
+  }, {
     key: 'isChecked',
     get: function get() {
       return (/x/i.test(this.match[5])

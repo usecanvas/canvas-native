@@ -52,7 +52,7 @@ describe('Blockquote', () => {
     it('returns its type and source', () => {
       const line = Blockquote.matchMarkdown('> Foo');
       expect(line.toJSON()).to.eql({
-        content: '> Foo',
+        content: 'Foo',
         type   : 'blockquote-item',
       });
     });

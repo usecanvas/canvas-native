@@ -33,7 +33,7 @@ var Comment = (function (_Type) {
     key: 'toJSON',
     value: function toJSON() {
       return {
-        content: this.match[3],
+        content: this.content,
         type: this.type,
         meta: {
           username: this.username
@@ -41,9 +41,19 @@ var Comment = (function (_Type) {
       };
     }
   }, {
+    key: 'content',
+    get: function get() {
+      return this.match[4];
+    }
+  }, {
     key: 'groupType',
     get: function get() {
       return 'comment';
+    }
+  }, {
+    key: 'isSummarized',
+    get: function get() {
+      return false;
     }
   }, {
     key: 'toMarkdown',

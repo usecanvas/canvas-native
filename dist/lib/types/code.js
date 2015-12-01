@@ -34,7 +34,7 @@ var Code = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[2]
+        content: this.content
       };
     }
   }, {
@@ -55,6 +55,11 @@ var Code = (function (_Type) {
       }
 
       return result;
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[2];
     }
   }, {
     key: 'groupType',

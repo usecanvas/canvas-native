@@ -36,6 +36,11 @@ var Type = (function () {
       return typeof this.level === 'number' && this.groupType !== 'canvas';
     }
   }, {
+    key: 'isSummarized',
+    get: function get() {
+      return true;
+    }
+  }, {
     key: 'source',
     get: function get() {
       return this.match[0];

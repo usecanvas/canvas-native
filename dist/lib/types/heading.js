@@ -32,7 +32,7 @@ var Heading = (function (_Type) {
     value: function toJSON() {
       return {
         type: this.type,
-        content: this.match[0],
+        content: this.content,
         meta: { level: this.level }
       };
     }
@@ -44,6 +44,11 @@ var Heading = (function (_Type) {
       }
 
       return this.match[0] + '\n';
+    }
+  }, {
+    key: 'content',
+    get: function get() {
+      return this.match[2];
     }
   }, {
     key: 'level',

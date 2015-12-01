@@ -36,7 +36,7 @@ describe('Comment', () => {
     it('returns its type, meta, and source', () => {
       const line = Comment.matchNative(`${wrap('comment-theuser')}// Foo`);
       expect(line.toJSON()).to.eql({
-        content: '// Foo',
+        content: 'Foo',
         type   : 'comment-item',
         meta   : {
           username: 'theuser'

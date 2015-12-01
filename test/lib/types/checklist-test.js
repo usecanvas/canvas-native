@@ -79,7 +79,7 @@ describe('Checklist', () => {
       const line = Checklist.match(wrap('checklist-0') + '- [x] Foo');
       expect(line.toJSON()).to.eql({
         type   : 'checklist-item',
-        content: '- [x] Foo',
+        content: 'Foo',
         meta   : {
           level  : 0,
           checked: true,

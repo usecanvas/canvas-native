@@ -18,7 +18,7 @@ describe('HorizontalRule', () => {
       const line = HorizontalRule.match('- - -');
       expect(line.toJSON()).to.eql({
         type   : 'horizontal-rule',
-        content: '- - -',
+        content: '',
       });
     });
   });
