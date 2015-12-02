@@ -5,7 +5,7 @@ import { wrap   } from '../../../lib/brackets';
 describe('Image', () => {
   describe('.match', () => {
     it('matches an image', () => {
-      const source = `${wrap('image')}https://example.com/foo.png`;
+      const source = makeNativeLine('https://example.com/foo.png');
       expect(Image.match(source)).to.be.an.instanceof(Image);
     });
   });
@@ -23,7 +23,7 @@ describe('Image', () => {
         Image.matchMarkdown(`![Alt text](${url} "title")`);
       expect(line)
         .to.be.an.instanceof(Image);
-      expect(line.source).to.eql(wrap('image') + url);
+      expect(line.source).to.eql(makeNativeLine(url));
     });
 
     it('matches an image no alt text and a title', () => {
@@ -31,7 +31,7 @@ describe('Image', () => {
         Image.matchMarkdown(`![](${url} "title")`);
       expect(line)
         .to.be.an.instanceof(Image);
-      expect(line.source).to.eql(wrap('image') + url);
+      expect(line.source).to.eql(makeNativeLine(url));
     });
 
     it('matches an image alt text and no title', () => {
@@ -39,15 +39,16 @@ describe('Image', () => {
         Image.matchMarkdown(`![](${url})`);
       expect(line)
         .to.be.an.instanceof(Image);
-      expect(line.source).to.eql(wrap('image') + url);
+      expect(line.source).to.eql(makeNativeLine(url));
     });
   });
 
   describe('#toJSON', () => {
     it('serializes to JSON', () => {
-      const line = Image.match(`${wrap('image')}https://example.com/test.png`);
+      const line = Image.match(makeNativeLine('https://example.com/test.png'));
       expect(line.toJSON()).to.eql({
         type   : 'image',
+        meta   : {},
         content: 'https://example.com/test.png',
       });
     });
@@ -57,7 +58,7 @@ describe('Image', () => {
     let line;
 
     beforeEach(() => {
-      line = Image.match(`${wrap('image')}https://example.com/test.png`);
+      line = Image.match(makeNativeLine('https://example.com/test.png'));
     });
 
     it('appends a new line mid-document', () => {
@@ -71,3 +72,8 @@ describe('Image', () => {
     });
   });
 });
+
+function makeNativeLine(url) {
+  const json = JSON.stringify({ url: url });
+  return wrap(`image-${json}`);
+}

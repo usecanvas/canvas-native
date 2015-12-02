@@ -32,29 +32,50 @@ var Image = (function (_Type) {
   _createClass(Image, [{
     key: 'toJSON',
     value: function toJSON() {
+      var meta = {};
+      var thisMeta = this.meta;
+
+      for (var key in thisMeta) {
+        if (!thisMeta.hasOwnProperty(key)) {
+          continue;
+        }
+
+        if (key === 'url') {
+          continue;
+        }
+
+        meta[key] = thisMeta[key];
+      }
+
       return {
         type: this.type,
-        content: this.content
+        content: this.content,
+        meta: meta
       };
     }
   }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
       if (!next) {
-        return this.match[2];
+        return this.content;
       }
 
-      return this.match[2] + '\n';
+      return this.content + '\n';
     }
   }, {
     key: 'content',
     get: function get() {
-      return this.match[2];
+      return this.meta.url;
+    }
+  }, {
+    key: 'meta',
+    get: function get() {
+      return JSON.parse(this.match[2]);
     }
   }], [{
     key: 'buildPrefix',
-    value: function buildPrefix() {
-      return (0, _brackets.wrap)('image');
+    value: function buildPrefix(url) {
+      return (0, _brackets.wrap)('image-' + JSON.stringify({ url: url }));
     }
   }, {
     key: 'matchMarkdown',
@@ -67,7 +88,7 @@ var Image = (function (_Type) {
 
       markdown = mdMatch[1];
 
-      var nativeString = this.buildPrefix(markdown) + markdown;
+      var nativeString = this.buildPrefix(markdown);
       return this.match(nativeString);
     }
   }, {
@@ -84,7 +105,7 @@ var Image = (function (_Type) {
   }, {
     key: 'nativePattern',
     get: function get() {
-      return new RegExp('^(' + (0, _brackets.wrap)('image') + ')(.*)$');
+      return new RegExp('^(' + (0, _brackets.wrap)('image-(.*)') + ')$');
     }
   }]);
 
