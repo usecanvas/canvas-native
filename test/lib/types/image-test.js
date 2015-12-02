@@ -63,12 +63,12 @@ describe('Image', () => {
 
     it('appends a new line mid-document', () => {
       expect(line.toMarkdown(line, line))
-        .to.eql('https://example.com/test.png\n');
+        .to.eql('![](https://example.com/test.png)\n');
     });
 
     it('does not append a new line at end of document', () => {
       expect(line.toMarkdown(line, null))
-        .to.eql('https://example.com/test.png');
+        .to.eql('![](https://example.com/test.png)');
     });
   });
 });

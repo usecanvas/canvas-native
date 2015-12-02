@@ -56,11 +56,14 @@ var Image = (function (_Type) {
   }, {
     key: 'toMarkdown',
     value: function toMarkdown(prev, next) {
+      var content = this.content;
+      var markdown = '![](' + this.content + ')';
+
       if (!next) {
-        return this.content;
+        return markdown;
       }
 
-      return this.content + '\n';
+      return markdown + '\n';
     }
   }, {
     key: 'content',
