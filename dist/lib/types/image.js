@@ -68,12 +68,16 @@ var Image = (function (_Type) {
   }, {
     key: 'content',
     get: function get() {
-      return this.meta.url;
+      return this.meta.url || '';
     }
   }, {
     key: 'meta',
     get: function get() {
-      return JSON.parse(this.match[2]);
+      try {
+        return JSON.parse(this.match[2]);
+      } catch (e) {
+        return {};
+      }
     }
   }], [{
     key: 'buildPrefix',
