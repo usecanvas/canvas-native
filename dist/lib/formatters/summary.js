@@ -20,6 +20,17 @@ var _removeMarkdown2 = _interopRequireDefault(_removeMarkdown);
 
 var MAX_LENGTH = 256;
 
+/**
+ * @module Formatters.Summary
+
+/**
+ * Format a CanvasNative document as a summary.
+ *
+ * @static
+ * @param {string} native A CanvasNative string
+ * @return {string} The summarized CanvasNative string
+ */
+
 function format(native) {
   var result = '';
   var scanner = new _scanner2['default'](native);
@@ -48,7 +59,12 @@ function format(native) {
         continue;
       }
 
-      var next = (0, _removeMarkdown2['default'])(nextContent).replace(/\.?$/, '. ');
+      var next = (0, _removeMarkdown2['default'])(nextContent);
+      if (!/[.?!]$/.test(next)) {
+        next = next + '. ';
+      } else {
+        next = next + ' ';
+      }
 
       if (next.length + result.length > 256) {
         var nextParts = next.split(/\W/);
