@@ -17,13 +17,17 @@ describe('parsers/markdown', () => {
         - Baz
       1. Qux
 
-      \`\`\`
+      \`\`\`ruby
       class Foo
         def bar
 
 
         end
       end
+      \`\`\`
+
+      \`\`\`
+      no language
       \`\`\`
 
       > Foo
@@ -41,12 +45,13 @@ describe('parsers/markdown', () => {
       `${wrap('unordered-list-0')}- Bar`,
       `${wrap('unordered-list-1')}- Baz`,
       `${wrap('ordered-list-0')}1. Qux`,
-      `${wrap('code')}class Foo`,
-      `${wrap('code')}  def bar`,
-      `${wrap('code')}`,
-      `${wrap('code')}`,
-      `${wrap('code')}  end`,
-      `${wrap('code')}end`,
+      `${wrap('code-ruby')}class Foo`,
+      `${wrap('code-ruby')}  def bar`,
+      `${wrap('code-ruby')}`,
+      `${wrap('code-ruby')}`,
+      `${wrap('code-ruby')}  end`,
+      `${wrap('code-ruby')}end`,
+      `${wrap('code')}no language`,
       `${wrap('blockquote')}> Foo`,
       `${wrap('blockquote')}> Bar`,
       'Paragraph',
