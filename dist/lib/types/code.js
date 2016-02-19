@@ -53,7 +53,7 @@ var Code = (function (_Type) {
         result = result + '\n```';
       }
 
-      if (next && next.type !== this.type) {
+      if (next && (next.type !== this.type || next.language !== this.language)) {
         result = result + '\n```\n';
       }
 

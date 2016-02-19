@@ -68,6 +68,12 @@ describe('Code', () => {
         .to.eql('alert("ok");\n```\n');
     });
 
+    it('appends a fence and new line when followed by a different lang', () => {
+      const line2 = Code.match(wrap('code-ruby') + 'alert("ok");');
+      expect(line.toMarkdown(line, line2))
+        .to.eql('alert("ok");\n```\n');
+    });
+
     it('appends a fence at the end of a document', () => {
       expect(line.toMarkdown(line, null))
         .to.eql('alert("ok");\n```');
