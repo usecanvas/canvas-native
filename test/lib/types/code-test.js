@@ -52,6 +52,12 @@ describe('Code', () => {
         .to.eql('```\nalert("ok");');
     });
 
+    it('prepends a fence with lang at the beginning of a code block', () => {
+      line = Code.match(wrap('code-ruby') + 'alert("ok");');
+      expect(line.toMarkdown(Paragraph.match('Foo'), line))
+        .to.eql('```ruby\nalert("ok");');
+    });
+
     it('prepends a fence at the beginning of a document', () => {
       expect(line.toMarkdown(null, line))
         .to.eql('```\nalert("ok");');

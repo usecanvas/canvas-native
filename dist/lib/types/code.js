@@ -46,7 +46,7 @@ var Code = (function (_Type) {
       var result = this.content;
 
       if (!prev || prev.type !== this.type) {
-        result = '```\n' + result;
+        result = '```' + (this.language || '') + '\n' + result;
       }
 
       if (!next) {
