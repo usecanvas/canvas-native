@@ -69,13 +69,15 @@ var Type = (function () {
   }, {
     key: 'matchMarkdown',
     value: function matchMarkdown(markdown) {
+      var context = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
       var mdMatch = markdown.match(this.markdownPattern);
 
       if (!mdMatch) {
         return null;
       }
 
-      var nativeString = this.buildPrefix(markdown) + markdown;
+      var nativeString = this.buildPrefix(markdown, context) + markdown;
       return this.match(nativeString);
     }
   }, {

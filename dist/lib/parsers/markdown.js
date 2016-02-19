@@ -15,7 +15,7 @@ function parse(markdown) {
   var sources = markdown.split('\n');
   var result = [];
 
-  var context = { groupType: null, hasTitle: false };
+  var context = { groupType: null, groupLang: null, hasTitle: false };
 
   var didNewLine = false;
 
@@ -36,11 +36,14 @@ function parse(markdown) {
         didNewLine = true;
       }
 
-      if (/^```.*/.test(source)) {
+      var fenceMatch = undefined;
+      if (fenceMatch = source.match(/^```(.*)$/)) {
         if (context.groupType === 'code') {
           context.groupType = null;
+          context.groupLang = null;
         } else {
           context.groupType = 'code';
+          context.groupLang = fenceMatch[1];
         }
 
         continue;
