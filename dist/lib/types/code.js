@@ -45,7 +45,7 @@ var Code = (function (_Type) {
     value: function toMarkdown(prev, next) {
       var result = this.content;
 
-      if (!prev || prev.type !== this.type) {
+      if (!prev || prev.type !== this.type || prev.language !== this.language) {
         result = '```' + (this.language || '') + '\n' + result;
       }
 
