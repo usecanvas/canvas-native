@@ -9,6 +9,11 @@ describe('Code', () => {
       const source = `${wrap('code')}Code`;
       expect(Code.match(source)).to.be.an.instanceof(Code);
     });
+
+    it('matches code with a language', () => {
+      const source = `${wrap('code-ruby')}Code`;
+      expect(Code.match(source)).to.be.an.instanceof(Code);
+    });
   });
 
   describe('.matchMarkdown', () => {
@@ -26,10 +31,11 @@ describe('Code', () => {
 
   describe('#toJSON', () => {
     it('serializes to JSON', () => {
-      const line = Code.match(wrap('code') + 'alert("ok");');
+      const line = Code.match(wrap('code-ruby') + 'alert("ok");');
       expect(line.toJSON()).to.eql({
         type   : 'code',
         content: 'alert("ok");',
+        meta   : { language: 'ruby' }
       });
     });
   });

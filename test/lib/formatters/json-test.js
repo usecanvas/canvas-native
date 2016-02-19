@@ -291,10 +291,12 @@ describe('formatters/json', () => {
           {
             type   : 'code',
             content: 'defmodule Foo',
+            meta: { language: null }
           },
           {
             type   : 'code',
             content: 'end',
+            meta: { language: null }
           },
         ]
       },
